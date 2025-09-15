@@ -1,0 +1,37 @@
+ERD Description – International Airport Database
+1. Entities and Attributes
+
+Airport: Contains airport details such as airport_id (PK), name, country, state, city, created_at, and updated_at.
+Airline: Stores airline company details: airline_id (PK), airline_code, name, country, created_at, updated_at.
+Flight: Represents scheduled and actual flight information: flight_id (PK), airline_id (FK), departure_airport_id (FK), arrival_airport_id (FK), dep_gate, arr_gate, sched_dep, sched_arr, act_dep, act_arr, created_at, updated_at.
+Passenger: Keeps passenger data: passenger_id (PK), first_name, last_name, gender, dob, citizenship_country, residence_country, passport_number, created_at, updated_at.
+Booking: Stores booking details: booking_id (PK), flight_id (FK), passenger_id (FK), status, platform, ticket_price, created_at, updated_at.
+Booking_Changes: Tracks modifications in bookings: change_id (PK), booking_id (FK), change_time, details.
+Boarding_Pass: Stores issued boarding passes: bp_id (PK), booking_id (FK), seat, boarding_time, created_at, updated_at.
+Baggage: Represents registered baggage: baggage_id (PK), booking_id (FK), weight_kg, created_at, updated_at.
+Baggage_Check: Stores baggage inspection results: check_id (PK), baggage_id (FK), passenger_id (FK), result, created_at, updated_at.
+Security_Check: Keeps security check details: sec_id (PK), passenger_id (FK), result, created_at, updated_at.
+
+2. Relationships
+
+One Airline → Many Flights.
+One Airport → Many Flights (departure/arrival).
+One Flight → Many Bookings.
+One Passenger → Many Bookings.
+One Booking → One Boarding_Pass.
+One Booking → Many Baggage.
+One Baggage → One Baggage_Check.
+One Passenger → Many Security_Checks.
+One Booking → Many Booking_Changes.
+
+3. Normalization
+
+The schema is normalized up to Third Normal Form (3NF):
+Each non-key attribute is fully dependent on the primary key.
+Transitive dependencies are removed (e.g., Passenger details are not stored in Booking).
+Many-to-many relationships are resolved via intermediate tables such as Booking and Booking_Changes.
+
+4. Conclusion
+
+This ERD represents a simplified but efficient model of an international airport system.
+It ensures data integrity through primary and foreign keys, reduces redundancy via normalization, and clearly defines relationships between passengers, flights, bookings, and airport services.
